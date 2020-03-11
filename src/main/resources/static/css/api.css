@@ -1,0 +1,23 @@
+.api_name{
+	width: 100px;
+}
+
+.api_request{
+	width: 150px;
+}
+
+.api_param{
+	width: 150px;
+}
+
+.api_function{
+	width: 200px;
+}
+
+.api_result{
+	width: 200px;
+}
+
+th.center, td.center{
+	text-align: center;
+}

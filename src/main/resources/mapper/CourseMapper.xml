@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+        <!DOCTYPE mapper
+                PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="per.jxnflzc.soarest.persistence.CourseDAO">
+    <resultMap id="courseResultMapper" type="per.jxnflzc.soarest.domain.Course"></resultMap>
+    <select id="getCourse" resultMap="courseResultMapper">
+      select * from course
+    </select>
+    <select id="getCourseByID" parameterType="String" resultType="per.jxnflzc.soarest.domain.Course">
+      select * from course where id = #{id}
+    </select>
+    <select id="getCourseByName" parameterType="String" resultType="per.jxnflzc.soarest.domain.Course">
+      select * from course where name = #{name}
+    </select>
+    <insert id="insertCourse" parameterType="per.jxnflzc.soarest.domain.Course">
+      insert into course values(#{id}, #{name})
+    </insert>
+    <delete id="deleteCourseByID" parameterType="String">
+      delete from course where id = #{id}
+    </delete>
+    <update id="updateCourse" parameterType="per.jxnflzc.soarest.domain.Course">
+      update course set name = #{name} where id = #{id}
+    </update>
+</mapper>
