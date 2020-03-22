@@ -37,10 +37,10 @@ public class APIParamTest {
         RestTemplate restTemplate = new RestTemplate();
         String response = restTemplate.postForObject(url, null, String.class);
         JSONObject jsonData = JSONObject.fromObject(response);
-        JSONArray result = (JSONArray) jsonData.get("result");
+        JSONArray todayOnhistory = (JSONArray) jsonData.get("result");//修改不规范命名
         String qrText = "";
-        for (int i = 0; i < result.size(); i++){
-            JSONObject jsonObject = result.getJSONObject(i);
+        for (int i = 0; i < todayOnhistory.size(); i++){
+            JSONObject jsonObject = todayOnhistory.getJSONObject(i);
             System.out.println(jsonObject.getString("date") + ", " + jsonObject.getString("title"));
             if (i < 3){
                 qrText += jsonObject.getString("date") + "," + jsonObject.getString("title");
@@ -53,8 +53,8 @@ public class APIParamTest {
         restTemplate = new RestTemplate();
         response = restTemplate.postForObject(url, null, String.class);
         jsonData = JSONObject.fromObject(response);
-        JSONObject result2 = (JSONObject) jsonData.get("result");
-        String base64_image = result2.getString("base64_image");
+        JSONObject qrcode = (JSONObject) jsonData.get("result");//修改不规范命名
+        String base64_image = qrcode.getString("base64_image");
 
         Base64.Decoder decoder = Base64.getDecoder();
         try {
