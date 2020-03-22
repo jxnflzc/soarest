@@ -34,17 +34,6 @@ public class APIParamTest {
                 break;
             default:System.exit(0);
         }
-        /*if (choice.equals("1")){
-            Calendar calendar = Calendar.getInstance();
-            url += "&date=" + (calendar.get(Calendar.MONTH)+1) + "/" + calendar.get(Calendar.DATE);
-        } else if (choice.equals("2")){
-            System.out.print("请输入你想查询“历史上的今日”的日期（格式：月 日）：");
-            String month = scanner.next();
-            String day = scanner.next();
-            url += "&date=" + month + "/" + day;
-        } else {
-            System.exit(0);
-        }*/
         RestTemplate restTemplate = new RestTemplate();
         String response = restTemplate.postForObject(url, null, String.class);
         JSONObject jsonData = JSONObject.fromObject(response);
@@ -83,22 +72,4 @@ public class APIParamTest {
         } catch (Exception e) {
         }
     }
-
-
-
-        /*try{
-            String url = "http://v.juhe.cn/weather/index";
-
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-            Map<String, String> map= new HashMap<>();
-            map.put("key", URLEncoder.encode("87d087b270edb3a1c7496334c49a6d04", "UTF-8"));
-            map.put("cityname", URLEncoder.encode("长沙", "UTF-8"));
-            RestTemplate restTemplate = new RestTemplate();
-
-            String response = restTemplate.getForObject(url, String.class, map);
-            System.out.println(response);
-        } catch (Exception ex){
-
-        }*/
 }
