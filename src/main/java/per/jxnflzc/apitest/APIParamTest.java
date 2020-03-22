@@ -34,24 +34,13 @@ public class APIParamTest {
                 break;
             default:System.exit(0);
         }
-        /*if (choice.equals("1")){
-            Calendar calendar = Calendar.getInstance();
-            url += "&date=" + (calendar.get(Calendar.MONTH)+1) + "/" + calendar.get(Calendar.DATE);
-        } else if (choice.equals("2")){
-            System.out.print("请输入你想查询“历史上的今日”的日期（格式：月 日）：");
-            String month = scanner.next();
-            String day = scanner.next();
-            url += "&date=" + month + "/" + day;
-        } else {
-            System.exit(0);
-        }*/
         RestTemplate restTemplate = new RestTemplate();
         String response = restTemplate.postForObject(url, null, String.class);
         JSONObject jsonData = JSONObject.fromObject(response);
-        JSONArray result = (JSONArray) jsonData.get("result");
+        JSONArray todayOnhistory = (JSONArray) jsonData.get("result");//修改不规范命名
         String qrText = "";
-        for (int i = 0; i < result.size(); i++){
-            JSONObject jsonObject = result.getJSONObject(i);
+        for (int i = 0; i < todayOnhistory.size(); i++){
+            JSONObject jsonObject = todayOnhistory.getJSONObject(i);
             System.out.println(jsonObject.getString("date") + ", " + jsonObject.getString("title"));
             if (i < 3){
                 qrText += jsonObject.getString("date") + "," + jsonObject.getString("title");
@@ -64,8 +53,8 @@ public class APIParamTest {
         restTemplate = new RestTemplate();
         response = restTemplate.postForObject(url, null, String.class);
         jsonData = JSONObject.fromObject(response);
-        JSONObject result2 = (JSONObject) jsonData.get("result");
-        String base64_image = result2.getString("base64_image");
+        JSONObject qrcode = (JSONObject) jsonData.get("result");//修改不规范命名
+        String base64_image = qrcode.getString("base64_image");
 
         Base64.Decoder decoder = Base64.getDecoder();
         try {
@@ -83,22 +72,4 @@ public class APIParamTest {
         } catch (Exception e) {
         }
     }
-
-
-
-        /*try{
-            String url = "http://v.juhe.cn/weather/index";
-
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-            Map<String, String> map= new HashMap<>();
-            map.put("key", URLEncoder.encode("87d087b270edb3a1c7496334c49a6d04", "UTF-8"));
-            map.put("cityname", URLEncoder.encode("长沙", "UTF-8"));
-            RestTemplate restTemplate = new RestTemplate();
-
-            String response = restTemplate.getForObject(url, String.class, map);
-            System.out.println(response);
-        } catch (Exception ex){
-
-        }*/
 }
